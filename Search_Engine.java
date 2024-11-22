@@ -37,16 +37,14 @@ public class Search_Engine {
                     
                     int pos = line.indexOf(',');
                     int docID = Integer.parseInt( line .substring(0, pos));
-
                     String data = line.substring(pos+1, line.length() - pos).trim();
                     data = data.substring(0, data.length() -2);
-
                     data = data.toLowerCase();
                     data =  data.replaceAll("[\']", " ");
+                     data =  data.replaceAll("-","");
                     data = data.replaceAll("[^a-zA-Z0-9]", " ").trim() ;
 
                     String [] words = data.split(" "); 
-
                     for (int i = 0; i < words.length ; i++)
                     {
                         String word = words[i].trim(); 
