@@ -1,11 +1,10 @@
 import java.util.Scanner;
-
 public class Main {
        
      public static Scanner input = new Scanner (System.in);
      public static Search_Engine SE = new Search_Engine();
-     
-     public static int menu()
+    
+    public static int menu()
     {
         System.out.println("1. Boolean Retrieval. ");
         System.out.println("2. Ranked Retrieval.");
@@ -18,12 +17,6 @@ public class Main {
         return choice;
     }
 
-    /*public static void printBoolean(boolean [] result)
-    {
-        Term t = new Term ("", result);
-        System.out.println(t);
-    }
-*/
     
     public static void Boolean_Retrieval_menu()
     {
@@ -40,7 +33,6 @@ public class Main {
         for ( int i = 0 ; i < Questions.length; i++)
         {
             String str = Questions[i];
-            // 1 inverted index List , 2 inverted index AVL
 
             System.out.println(str);
             System.out.print("Result doc IDs: ");
@@ -85,29 +77,24 @@ public class Main {
 
         SE.LoadData("C:\\Users\\Majdi\\Downloads\\data\\stop.txt", "C:\\Users\\Majdi\\Downloads\\data\\dataset.CSV");
 
-        // TODO code application logic here
         int choice;
         
         do {
                 choice = menu();
                 switch (choice)
                 {
-                    //Boolean Retrieval: to enter a Boolean query that will return a set of unranked documents  
                     case 1:
                             Boolean_Retrieval_menu();
                             break;
                             
-                    //Ranked Retrieval: to enter a query that will return a ranked list of documents with their scores 
                     case 2:
                             Ranked_Retrieval_menu();
                             break;
                     
-                    //Indexed Documents: to show number of documents in the index 
                     case 3:
                             Indexed_Documents_menu();
                             break;
                     
-                    //Indexed Tokens: to show number of vocabulary and tokens in the index  
                     case 4:
                             Indexed_Tokens_menu();
                             break;
