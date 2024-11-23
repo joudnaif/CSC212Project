@@ -21,7 +21,7 @@ public class Index {
                 index.insert(word);
             }
 
-           public boolean found(String word)
+           public boolean search(String word)
            {
                if (index.empty())
                    return false;
@@ -79,7 +79,7 @@ public  boolean [] getDocs (String str)
         result[i] = false;
     
     for (int i = 0 ; i < 50 ; i++)
-        if (indexes[i].found(str))
+        if (indexes[i].search(str))
             result[i] = true;
 
     return result;
