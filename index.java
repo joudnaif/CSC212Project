@@ -85,7 +85,7 @@ public  boolean [] getDocs (String str)
     return result;
 }
 
-        public LinkedList<Integer> AND_OR_Function (String str )
+        public LinkedList<Integer> AND_OR_Query (String str )
         {
             if (! str.contains(" OR ") && ! str.contains(" AND "))
             {
@@ -136,7 +136,7 @@ public  boolean [] getDocs (String str)
             return OR_Function (str);
         }
         
-        public LinkedList<Integer> AND_Function (String str)
+        public LinkedList<Integer> AND_Query (String str)
         {
             String [] ANDs = str.split(" AND ");
  
@@ -176,7 +176,7 @@ public  boolean [] getDocs (String str)
             }
             return result;
         }
-        public LinkedList<Integer> OR_Function (String str)
+        public LinkedList<Integer> OR_Query (String str)
         {
             String [] ORs = str.split(" OR ");
 
