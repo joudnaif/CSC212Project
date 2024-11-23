@@ -16,7 +16,7 @@ public class Index {
                 index = new LinkedList <String>();
             }
 
-            public void addNew (String word)
+            public void addWord (String word)
             {
                 index.insert(word);
             }
@@ -55,7 +55,7 @@ public class Index {
         
     public void addDocument ( int docID, String data)
     {
-            indexes[docID].addNew(data);
+            indexes[docID].addWord(data);
     }
     
     public void printDocment (int docID)
