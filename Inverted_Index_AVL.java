@@ -72,17 +72,17 @@ public class Inverted_Index_AVL {
         String[] words = Query.split("AND");
         if (words.length == 0) return result;
 
-        
+        // Handle the first word
         if (search(words[0].trim().toLowerCase())) {
-           result = Inverted_Index_AVL.retrieve().docIDS_ranked.getKeys();
+           result = Inverted_Index_AVL.retrieve().documentIDs_ranked.getKeys();
         }
 
-        
+        // Process remaining words
         for (int i = 0; i < words.length; i++) {
 
                 LinkedList<Integer> b1 = result;
                 if (search(words[i].trim().toLowerCase())) {
-                    LinkedList<Integer> docs = Inverted_Index_AVL.retrieve().docIDS_ranked.getKeys();
+                    LinkedList<Integer> docs = Inverted_Index_AVL.retrieve().documentIDs_ranked.getKeys();
                     docs.findFirst();
 
                 for ( int j = 0 ; j < docs.size ; j++)
@@ -120,13 +120,13 @@ public class Inverted_Index_AVL {
 
              if (search(words[0].trim().toLowerCase()))
                 {
-                    result = Inverted_Index_AVL.retrieve().docIDS_ranked.getKeys();
+                    result = Inverted_Index_AVL.retrieve().documentIDs_ranked.getKeys();
                 }
                 for ( int i = 1 ; i< words.length ; i++)
                 {
                     if (search(words[i].trim().toLowerCase()))
                     {
-                    LinkedList<Integer> docs = Inverted_Index_AVL.retrieve().docIDS_ranked.getKeys();
+                    LinkedList<Integer> docs = Inverted_Index_AVL.retrieve().documentIDs_ranked.getKeys();
                     docs.findFirst();    
                     for ( int j = 0 ; j < docs.size ; j++)
                         {  
@@ -168,7 +168,7 @@ public class Inverted_Index_AVL {
                     Query = Query.toLowerCase().trim();
 
                     if (this.search (Query))
-                        result = Inverted_Index_AVL.retrieve().docIDS_ranked.getKeys();
+                        result = Inverted_Index_AVL.retrieve().documentIDs_ranked.getKeys();
                         return result;
                     
                     
@@ -218,7 +218,7 @@ public class Inverted_Index_AVL {
 
          }
 
-        public void TF(String str)
+        public void Ranking(String str)
             {
                 str = str.toLowerCase().trim();
             String [] words = str.split(" ");

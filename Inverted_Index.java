@@ -88,11 +88,11 @@ public class Inverted_Index {
     }
     
     
-    public LinkedList<Integer> AndQuery(String Query) {
+    public LinkedList<Integer> AndQuery(String query) {
     LinkedList<Integer> result = new LinkedList<>();
     
 
-    String[] words = Query.split("AND");
+    String[] words = query.split("AND");
     if (words.length == 0) return result;
 
     // Handle the first word
@@ -251,7 +251,7 @@ public class Inverted_Index {
        
      }
 
-    public void TF(String str)
+    public void Ranking(String str)
         {
             str = str.toLowerCase().trim();
             String [] words = str.split(" ");
@@ -260,24 +260,24 @@ public class Inverted_Index {
             {
                 freqs[i] = new frequency();
                 freqs[i].docID = i;
-                freqs[i].f = 0;
+                freqs[i].f = 0;//rank =0
                 freqs[i].msg = "Document " + i + " : ";
             }
             
             for ( int i = 0 ; i < words.length ; i++)
             {
-                if (search (words[i]))
+                if (search(words[i]))
                 {
                     boolean [] docs = Inverted_Index.retrieve().getDocs();
                     int [] rank = Inverted_Index.retrieve().getRanked();
                     
                     for ( int j = 0 ; j < docs.length ; j ++)
                     {
-                        if (docs[j] == true)
+                        if (docs[j] == true)// if doc has a rank
                         {
                             int index = j;
                             freqs[index].docID = index;
-                            freqs[index].f += rank[j];
+                            freqs[index].f += rank[j];// add up the rank
                             freqs[index].msg +=" ( " + words[i] + ", " + rank[j] + " ) +"; 
                         }
                     }
@@ -290,7 +290,7 @@ public class Inverted_Index {
                 freqs[x].msg += " = " + freqs[x].f;
             }
             
-            mergesort(freqs, 0, freqs.length-1 );
+            mergesort(freqs, 0, freqs.length-1 );// sort the list based on frequncy
             
             System.out.println("Results: ");
             

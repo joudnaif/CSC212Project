@@ -65,15 +65,15 @@ public class Inverted_Index_BST {
         }
 
 
-        public LinkedList<Integer> AndQuery(String Query) {
+        public LinkedList<Integer> AndQuery(String query) {
         LinkedList<Integer> result = new LinkedList<>();
 
 
-        String[] words = Query.split("AND");
+        String[] words = query.split("AND");
         if (words.length == 0) return result;
         
         if (search(words[0].trim().toLowerCase())) {
-                result = Inverted_Index_BST.retrieve().docIDS_ranked.getKeys();
+                result = Inverted_Index_BST.retrieve().documentIDs_ranked.getKeys();
                     
         }
 
@@ -82,7 +82,7 @@ public class Inverted_Index_BST {
 
                 LinkedList<Integer> b1 = result;
                 if (search(words[i].trim().toLowerCase())) {
-                    LinkedList<Integer> docs = Inverted_Index_BST.retrieve().docIDS_ranked.getKeys();
+                    LinkedList<Integer> docs = Inverted_Index_BST.retrieve().documentIDs_ranked.getKeys();
                     docs.findFirst();
 
                     for ( int j = 0 ; j < docs.size ; j++){
@@ -118,13 +118,13 @@ public class Inverted_Index_BST {
 
              if (search(words[0].trim().toLowerCase()))
                 {
-                result = Inverted_Index_BST.retrieve().docIDS_ranked.getKeys();
+                result = Inverted_Index_BST.retrieve().documentIDs_ranked.getKeys();
                 }
                 for ( int i = 1 ; i< words.length ; i++)
                 {
                     if (search(words[i].trim().toLowerCase()))
                     {
-                    LinkedList<Integer> docs = Inverted_Index_BST.retrieve().docIDS_ranked.getKeys();
+                    LinkedList<Integer> docs = Inverted_Index_BST.retrieve().documentIDs_ranked.getKeys();
                     docs.findFirst();    
                     for ( int j = 0 ; j < docs.size ; j++)
                         {  
@@ -217,7 +217,7 @@ public class Inverted_Index_BST {
 
          }
 
-        public void TF(String str)
+        public void Ranking(String str)
             {
                 str = str.toLowerCase().trim();
             String [] words = str.split(" ");

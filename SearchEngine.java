@@ -17,7 +17,7 @@ import java.io.FileNotFoundException;
 public class SearchEngine {
     LinkedList<String> stopWords;
     
-    index Index;
+    Index Index;
     Inverted_Index Inverted;//object of type inverted index- document
     Inverted_Index_AVL Inverted_AVL;
     Inverted_Index_BST Inverted_BST;
@@ -126,16 +126,16 @@ public class SearchEngine {
          switch (DSType)
         {
             case 1 :
-                Index.TF(str);
+                Index.Ranking(str);
                 break;
             case 2 :
-                Inverted.TF(str);
+                Inverted.Ranking(str);
                 break;
             case 3:
-                Inverted_BST.TF(str);
+                Inverted_BST.Ranking(str);
                 break;
             case 4:
-                Inverted_AVL.TF(str);
+                Inverted_AVL.Ranking(str);
                 break;
             default :
                 System.out.println("Invalid data structure");
@@ -194,7 +194,7 @@ public class SearchEngine {
     public void Indexed_Tokens()
     {
         System.out.println("All tokens with the documents appear in it ");
-        Inverted_BST.Inverted_Index_BST.PrintData();
+        Inverted_BST.Inverted_Index_BST.Traverse();
     }
     
     }
