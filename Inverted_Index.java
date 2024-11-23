@@ -88,11 +88,11 @@ public class Inverted_Index {
     }
     
     
-    public LinkedList<Integer> AndQuery(String query) {
+    public LinkedList<Integer> AndQuery(String Query) {
     LinkedList<Integer> result = new LinkedList<>();
     
 
-    String[] words = query.split("AND");
+    String[] words = Query.split("AND");
     if (words.length == 0) return result;
 
     // Handle the first word
