@@ -1,11 +1,4 @@
-/**
- * Index: A mapping from document IDs to a list of words contained in the document. 
- */
 
-/**
- *
- * @author Manal Alhihi
- */
 public class Index {
     
     class Document {
@@ -37,7 +30,6 @@ public class Index {
                return false;
            }
     }   
-    //===========================================================
     
     Document [] indexes;
     
