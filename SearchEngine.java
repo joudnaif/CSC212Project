@@ -17,7 +17,7 @@ import java.io.FileNotFoundException;
 public class SearchEngine {
     LinkedList<String> stopWords;
     
-    Index = new Index();
+    Index = new index();
     Inverted_Index Inverted;//object of type inverted index- document
     Inverted_Index_AVL Inverted_AVL;
     Inverted_Index_BST Inverted_BST;
