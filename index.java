@@ -131,12 +131,12 @@ public  boolean [] getDocs (String str)
             }
             
             else  if (str.contains(" AND "))
-                return AND_Function (str);
+                return ANDQuery (str);
             
-            return OR_Function (str);
+            return ORQuery (str);
         }
         
-        public LinkedList<Integer> AND_Query (String str)
+        public LinkedList<Integer> ANDQuery (String str)
         {
             String [] ANDs = str.split(" AND ");
  
@@ -176,7 +176,7 @@ public  boolean [] getDocs (String str)
             }
             return result;
         }
-        public LinkedList<Integer> OR_Query (String str)
+        public LinkedList<Integer> ORQuery (String str)
         {
             String [] ORs = str.split(" OR ");
 
@@ -212,7 +212,7 @@ public  boolean [] getDocs (String str)
             }
             return result;
         }
-        public void TF(String str)
+        public void Ranking(String str)
         {
             str = str.toLowerCase().trim();
             String [] words = str.split(" ");
