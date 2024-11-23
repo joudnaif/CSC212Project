@@ -65,11 +65,11 @@ public class Inverted_Index_BST {
         }
 
 
-        public LinkedList<Integer> AndQuery(String query) {
+        public LinkedList<Integer> AndQuery(String Query) {
         LinkedList<Integer> result = new LinkedList<>();
 
 
-        String[] words = query.split("AND");
+        String[] words = Query.split("AND");
         if (words.length == 0) return result;
         
         if (search(words[0].trim().toLowerCase())) {
