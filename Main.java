@@ -2,7 +2,7 @@ import java.util.Scanner;
 public class Main {
        
      public static Scanner input = new Scanner (System.in);
-     public static Search_Engine SE = new Search_Engine();
+     public static SearchEngine SE = new SearchEngine();
     
     public static int menu()
     {
@@ -70,7 +70,7 @@ public class Main {
     public static void Indexed_Tokens_menu()
     {
         System.out.println("######## Indexed Tokens ######## ");
-        System.out.println("tokens " + SE.tokens);
+        System.out.println("tokens " + SE.token);
     }
     
     public static void main(String[] args) {
