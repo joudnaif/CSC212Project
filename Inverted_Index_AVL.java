@@ -65,19 +65,19 @@ public class Inverted_Index_AVL {
         }
 
 
-        public LinkedList<Integer> AndQuery(String query) {
+        public LinkedList<Integer> AndQuery(String Query) {
         LinkedList<Integer> result = new LinkedList<>();
 
 
-        String[] words = query.split("AND");
+        String[] words = Query.split("AND");
         if (words.length == 0) return result;
 
-        // Handle the first word
+        
         if (search(words[0].trim().toLowerCase())) {
            result = Inverted_Index_AVL.retrieve().docIDS_ranked.getKeys();
         }
 
-        // Process remaining words
+        
         for (int i = 0; i < words.length; i++) {
 
                 LinkedList<Integer> b1 = result;
