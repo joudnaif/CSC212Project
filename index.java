@@ -101,11 +101,11 @@ public  boolean [] getDocs (String str)
             else if (str.contains(" OR ") && str.contains(" AND "))
             {
                 String [] AND_ORs = str.split(" OR ");
-                LinkedList<Integer> result = AND_Function (AND_ORs[0]);
+                LinkedList<Integer> result = ANDQuery (AND_ORs[0]);
                
                 for ( int i = 1 ; i < AND_ORs.length ; i++  )
                 {   
-                    LinkedList<Integer> r2 =AND_Function (AND_ORs[i]);
+                    LinkedList<Integer> r2 =ANDQuery (AND_ORs[i]);
 
                     r2.findFirst();
                     for ( int j = 0 ; j < r2.size() ; j++)
