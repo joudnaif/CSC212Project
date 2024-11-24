@@ -64,7 +64,7 @@ public class Main {
     public static void Indexed_Documents_menu()
     {
         System.out.println("######## Indexed Documents ######## ");
-        System.out.println("Indexed Documents " + SE.index.indexes.length);
+        System.out.println("Indexed Documents " + SE.Index.indexes.length);
     }
     
     public static void Indexed_Tokens_menu()
@@ -75,7 +75,9 @@ public class Main {
     
     public static void main(String[] args) {
 
-        SE.LoadData("C:\\Users\\Majdi\\Downloads\\data\\stop.txt", "C:\\Users\\Majdi\\Downloads\\data\\dataset.CSV");
+        SE.readStopWords("stop.txt");
+        SE.readDocument("dataset.csv");
+
 
         int choice;
         
