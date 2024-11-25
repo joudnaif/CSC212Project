@@ -75,7 +75,7 @@ public class SearchEngine {
                 int id = Integer.parseInt(idString);
                 String doc = line.substring(line.indexOf(',')+1).trim();
                 
-                doc = doc.toLowerCase().replaceAll("[^a-zA-Z0-9", "");
+                doc = doc.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
                 String tokens[] = doc.split("\\s+");
                 for(String w :tokens){
                     if(!searchStopWords(w)){// add only if doesn't exsist in stop word list
@@ -95,6 +95,70 @@ public class SearchEngine {
         }catch(IOException e){
             e.printStackTrace();
         }
+    }
+          
+              public void LoadData (String stopFile, String fileName)
+    {
+            try{
+                File stopfile = new File (stopFile);
+                Scanner reader = new Scanner (stopfile).useDelimiter("\\Z");
+                String stops = reader.next();
+                
+                stops = stops.replaceAll("\n", " ");
+                
+                File docsfile = new File(fileName);
+                Scanner reader1 = new Scanner (docsfile);
+                String line = reader1.nextLine();
+                
+                for ( int lineID = 0 ; lineID <50 ; lineID ++ ) 
+                {
+                    line = reader1.nextLine().toLowerCase();
+                    
+                    int pos = line.indexOf(',');
+                    int docID = Integer.parseInt( line .substring(0, pos));
+
+                    String data = line.substring(pos+1, line.length() - pos).trim();
+                    data = data.substring(0, data.length() -1);
+
+                    data = data.toLowerCase();
+                    data =  data.replaceAll("[\']", " ");
+                    data = data.replaceAll("[^a-zA-Z0-9]", " ").trim() ;
+
+                    String [] words = data.split(" "); // --1
+
+                    for (int i = 0; i < words.length ; i++)
+                    {
+                        String word = words[i].trim(); //--2
+                
+                        if ( word.compareToIgnoreCase("") != 0)
+                            token ++;
+                        
+                        //this.test.addNew(docID, word);
+                                
+                        if ( ! stops.contains(word + " ")) //--3
+                         {
+                            this.Index.addDocument(docID, word);
+                            this.Inverted.addWord(word,docID);
+                            this.Inverted_AVL.addWord(word,docID);
+                            this.Inverted_BST.addWord(word,docID);
+                        }
+                    }
+
+                  
+                }
+                
+
+                //vocab = test.size();
+      
+                System.out.println("tokens " + token);
+                System.out.println("vocabs " + vocab);
+                
+                reader.close();
+                reader1.close();
+            }
+            catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
     }
     public LinkedList<Integer> Boolean_Retrieval(String str , int DSType)
     {

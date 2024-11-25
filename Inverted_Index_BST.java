@@ -65,94 +65,88 @@ public class Inverted_Index_BST {
         }
 
 
-        public LinkedList<Integer> AndQuery(String query) {
-        LinkedList<Integer> result = new LinkedList<>();
-
-
-        String[] words = query.split("AND");
-        if (words.length == 0) return result;
-        
-        if (search(words[0].trim().toLowerCase())) {
+        public LinkedList<Integer> AndQuery(String Query) {
+        String [] ANDs = Query.split(" AND ");
+ 
+            LinkedList<Integer> result = new LinkedList<Integer>();
+            if (this.search (ANDs[0].toLowerCase().trim()))
                 result = Inverted_Index_BST.retrieve().documentIDs_ranked.getKeys();
-                    
-        }
-
-        
-        for (int i = 0; i < words.length; i++) {
+            
+            
+            for ( int i = 0 ; i< ANDs.length ; i++)
+            {
 
                 LinkedList<Integer> b1 = result;
-                if (search(words[i].trim().toLowerCase())) {
-                    LinkedList<Integer> docs = Inverted_Index_BST.retrieve().documentIDs_ranked.getKeys();
-                    docs.findFirst();
+                result = new LinkedList<Integer> ();
 
-                    for ( int j = 0 ; j < docs.size ; j++){
+                if (this.search (ANDs[i].toLowerCase().trim()))
+                {
+                    LinkedList<Integer> docs = Inverted_Index_BST.retrieve().documentIDs_ranked.getKeys();
+                    
+                    docs.findFirst();
+                    for ( int j = 0 ; j < docs.size ; j++)
+                    {  
                         b1.findFirst();
                         boolean found =  false;
-                        while ( ! b1.last()){
-                            if (b1.retrieve()==docs.retrieve()) 
+                        while ( ! b1.last())
+                        {
+                            if ( b1.retrieve()==docs.retrieve()) 
                             {
                                 found = true;
                                 break;
-                                 }
-                                 b1.findNext();
-                                }
-                                if (b1.retrieve()== docs.retrieve()) 
-                                    found = true;
+                            }
+                            b1.findNext();
+                        }
+                        if ( b1.retrieve()== docs.retrieve()) 
+                            found = true;
 
+                        if (found)
+                            result.insert(docs.retrieve());
 
-                                if (found)
-                                   result.insert(docs.retrieve());
-                                docs.findNext();
+                        docs.findNext();
+                    }
                 }
             }
-        }
-        return result;
+            return result;
     }
 
         public LinkedList<Integer> OrQuery(String Query){
-            LinkedList<Integer> result = new LinkedList<Integer> ();
+            String [] ORs = Query.split(" OR ");
 
-            String words[] = Query.split("OR");
-            if(words.length==0)
-                return result;
-
-             if (search(words[0].trim().toLowerCase()))
-                {
+            LinkedList<Integer> result =  new LinkedList<Integer> ();
+            if (this.search (ORs[0].toLowerCase().trim()))
                 result = Inverted_Index_BST.retrieve().documentIDs_ranked.getKeys();
-                }
-                for ( int i = 1 ; i< words.length ; i++)
+            
+            for ( int i = 1 ; i< ORs.length ; i++)
+            {
+                if (this.search (ORs[i].toLowerCase().trim()))
                 {
-                    if (search(words[i].trim().toLowerCase()))
-                    {
                     LinkedList<Integer> docs = Inverted_Index_BST.retrieve().documentIDs_ranked.getKeys();
-                    docs.findFirst();    
+                    docs.findFirst();
                     for ( int j = 0 ; j < docs.size ; j++)
-                        {  
+                    {  
                             result.findFirst();
                             boolean found =  false;
-                            while (! result.last() )
-                                {
-                                    if (result.retrieve()== docs.retrieve())
-                                    {
-                                        found = true;
-                                        break;
-                                    }
-                                    result.findNext();
-                                }
-                                if (result.retrieve() == docs.retrieve())
+                            while (! result.last())
+                            {
+                                if ( result.retrieve()== docs.retrieve())
                                 {
                                     found = true;
                                     break;
                                 }
+                                result.findNext();
+                            }
+                            if ( result.retrieve() == docs.retrieve())
+                                found = true;
 
-                                if (! found)
-                                    result.insert(j);
-                                  docs.findNext();
-                            } 
-                        }
-                    }
-                
-                return result;
+                            if (! found)
+                                result.insert(j);
+
+                            docs.findNext();
+                    } 
+                 }
+              }
+            return result;
 }
         
 

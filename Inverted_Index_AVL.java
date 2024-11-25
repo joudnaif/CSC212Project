@@ -66,26 +66,25 @@ public class Inverted_Index_AVL {
 
 
         public LinkedList<Integer> AndQuery(String Query) {
-        LinkedList<Integer> result = new LinkedList<>();
-
-
-        String[] words = Query.split("AND");
-        if (words.length == 0) return result;
-
-        // Handle the first word
-        if (search(words[0].trim().toLowerCase())) {
-           result = Inverted_Index_AVL.retrieve().documentIDs_ranked.getKeys();
-        }
-
-        // Process remaining words
-        for (int i = 0; i < words.length; i++) {
+        String [] ANDs = Query.split(" AND ");
+ 
+            LinkedList<Integer> result = new LinkedList<Integer>();
+            if (this.search (ANDs[0].toLowerCase().trim()))
+                result = Inverted_Index_AVL.retrieve().documentIDs_ranked.getKeys();
+            
+            
+            for ( int i = 0 ; i< ANDs.length ; i++)
+            {
 
                 LinkedList<Integer> b1 = result;
-                if (search(words[i].trim().toLowerCase())) {
-                    LinkedList<Integer> docs = Inverted_Index_AVL.retrieve().documentIDs_ranked.getKeys();
-                    docs.findFirst();
+                result = new LinkedList<Integer> ();
 
-                for ( int j = 0 ; j < docs.size ; j++)
+                if (this.search (ANDs[i].toLowerCase().trim()))
+                {
+                    LinkedList<Integer> docs = Inverted_Index_AVL.retrieve().documentIDs_ranked.getKeys();
+                    
+                    docs.findFirst();
+                    for ( int j = 0 ; j < docs.size ; j++)
                     {  
                         b1.findFirst();
                         boolean found =  false;
@@ -108,29 +107,26 @@ public class Inverted_Index_AVL {
                     }
                 }
             }
+            
             return result;
     }
 
         public LinkedList<Integer> OrQuery(String Query){
-            LinkedList<Integer> result = new LinkedList<Integer> ();
+             String [] ORs = Query.split(" OR ");
 
-            String words[] = Query.split("OR");
-            if(words.length==0)
-                return result;
-
-             if (search(words[0].trim().toLowerCase()))
+            LinkedList<Integer> result =  new LinkedList<Integer> ();
+            if (this.search (ORs[0].toLowerCase().trim()))
+                result = Inverted_Index_AVL.retrieve().documentIDs_ranked.getKeys();
+            
+            for ( int i = 1 ; i< ORs.length ; i++)
+            {
+                if (this.search (ORs[i].toLowerCase().trim()))
                 {
-                    result = Inverted_Index_AVL.retrieve().documentIDs_ranked.getKeys();
-                }
-                for ( int i = 1 ; i< words.length ; i++)
-                {
-                    if (search(words[i].trim().toLowerCase()))
-                    {
                     LinkedList<Integer> docs = Inverted_Index_AVL.retrieve().documentIDs_ranked.getKeys();
-                    docs.findFirst();    
+                    docs.findFirst();
                     for ( int j = 0 ; j < docs.size ; j++)
-                        {  
-                             result.findFirst();
+                    {  
+                            result.findFirst();
                             boolean found =  false;
                             while (! result.last())
                             {
@@ -147,11 +143,11 @@ public class Inverted_Index_AVL {
                             if (! found)
                                 result.insert(j);
 
-                            docs.findNext(); 
-                        }
-                    }
-                }
-                return result;
+                            docs.findNext();
+                    } 
+                 }
+              }
+            return result;
 
         }
 

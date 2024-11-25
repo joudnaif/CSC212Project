@@ -37,7 +37,7 @@ public class Inverted_Index {
         
          if (Inverted_Index.empty())// the list of words is empty
            {
-               Term t = new Term ();
+                Term t = new Term ();
                 t.setWord(word);
                 t.add_docID(id);
                 Inverted_Index.insert(t);
@@ -88,38 +88,39 @@ public class Inverted_Index {
     }
     
     
-    public LinkedList<Integer> AndQuery(String query) {
-    LinkedList<Integer> result = new LinkedList<>();
-    
-
-    String[] words = query.split("AND");
-    if (words.length == 0) return result;
-
-    // Handle the first word
-    if (search(words[0].trim().toLowerCase())) {
-       boolean [] docs = Inverted_Index.retrieve().getDocs();
+    public LinkedList<Integer> AndQuery(String Query) {
+    String [] ANDs = Query.split(" AND ");
+ 
+            LinkedList<Integer> result = new LinkedList<Integer>();
+            if (this.search (ANDs[0].toLowerCase().trim()))
+            {
+                boolean [] docs = Inverted_Index.retrieve().getDocs();
                 for ( int i = 0 ; i < docs.length ; i++)
                     if (docs[i]) 
                         result.insert(i);
-    }
+            }
+            
+            for ( int i = 1 ; i< ANDs.length ; i++)
+            {
+                LinkedList<Integer> b1 = result;
+                result = new LinkedList<Integer> ();
 
-    // Process remaining words
-    for (int i = 1; i < words.length; i++) {
-       
-            LinkedList<Integer> b1 = result;
-            if (search(words[i].trim().toLowerCase())) {
-            boolean [] docs = Inverted_Index.retrieve().getDocs();
-            for ( int j = 0 ; j < docs.length ; j++){
-                if (docs[j] )  {
-                    b1.findFirst();
-                    boolean found =  false;
-                    while ( ! b1.last()){
-                        if ( b1.retrieve()==j) 
-                        {
-                            found = true;
-                            break;
-                             }
-                             b1.findNext();
+                if (this.search (ANDs[i].toLowerCase().trim()))
+                {
+                    boolean [] docs = Inverted_Index.retrieve().getDocs();
+                    for ( int j = 0 ; j < docs.length ; j++)
+                    {  
+                        if (docs[j] )  {
+                            b1.findFirst();
+                            boolean found =  false;
+                            while ( ! b1.last())
+                            {
+                                if ( b1.retrieve()==j) 
+                                {
+                                    found = true;
+                                    break;
+                                }
+                                b1.findNext();
                             }
                             if ( b1.retrieve()== j) 
                                 found = true;
@@ -128,29 +129,26 @@ public class Inverted_Index {
                             if (found)
                                 result.insert(j);
                         }
+                    }
+                }
             }
-        }
-    }
-    return result;
+            return result;
 }
     
     public LinkedList<Integer> OrQuery(String Query){
-        LinkedList<Integer> result = new LinkedList<Integer> ();
-        
-        String words[] = Query.split("OR");
-        if(words.length==0)
-            return result;
-        
-         if (search(words[0].trim().toLowerCase()))
+        String [] ORs = Query.split(" OR ");
+
+            LinkedList<Integer> result = new LinkedList<Integer> ();
+            if (this.search (ORs[0].toLowerCase().trim()))
             {
                 boolean [] docs = Inverted_Index.retrieve().getDocs();
                 for ( int i = 0 ; i < docs.length ; i++)
                     if (docs[i]) 
                         result.insert(i);
             }
-            for ( int i = 1 ; i< words.length ; i++)
+            for ( int i = 1 ; i< ORs.length ; i++)
             {
-                if (search(words[i].trim().toLowerCase()))
+                if (this.search (ORs[i].toLowerCase().trim()))
                 {
                     boolean [] docs = Inverted_Index.retrieve().getDocs();
                     for ( int j = 0 ; j < docs.length ; j++)
